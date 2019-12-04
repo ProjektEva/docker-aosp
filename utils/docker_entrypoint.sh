@@ -47,6 +47,16 @@ if [ -z "$args" ]; then
   args="bash"
 fi
 
-# Execute command as `aosp` user
 export HOME=/home/aosp
-exec sudo -E -u aosp $args
+msg="cloning phh repo" && echo $msg
+git clone https://github.com/ProjektEva/treble_experimentations.git $HOME/treble_experimentations
+echo ""
+
+bash treble_experimentations/build-dakkar-docker.sh aosp10 arm64-ab-vanilla-nosu
+
+# Execute command as `aosp` user
+exec $args
+
+# msg="cloning phh repo" && echo $msg
+# git clone https://github.com/ProjektEva/treble_experimentations.git $HOME/treble_experimentations
+# echo ""
